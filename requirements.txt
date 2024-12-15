@@ -1,0 +1,11 @@
+Flask
+torch
+torchvision
+pandas
+numpy
+matplotlib
+scikit-learn
+seaborn
+opencv-python
+Pillow
+optuna

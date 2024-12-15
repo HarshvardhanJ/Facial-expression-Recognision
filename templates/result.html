@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .confidence-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analysis Results</h1>
+        <div class="result-container">
+            <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image" class="result-image">
+            <div class="prediction">
+                <h2>Predicted Expression: {{ label }}</h2>
+                <div class="confidence-bar" data-confidence="{{ confidence * 100 }}">
+                    <div class="confidence-fill" id="confidenceFill"></div>
+                </div>
+                <p>Confidence: {{ "%.2f"|format(confidence * 100) }}%</p>
+            </div>
+            <a href="{{ url_for('upload_image') }}" class="upload-btn">Analyze Another Image</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Animate the confidence bar on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const confidenceFill = document.querySelector('.confidence-fill');
+            confidenceFill.style.width = '0%';
+            const confidenceBar = document.querySelector('.confidence-bar');
+            const confidenceValue = confidenceBar.getAttribute('data-confidence');
+            setTimeout(() => {
+                confidenceFill.style.width = confidenceValue + '%';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
