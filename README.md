@@ -17,10 +17,10 @@ Understanding human emotions through facial expressions is a challenging task th
 
 ## Results
 
-![Training Log](.data/swappy-20241213-024501.png)
+![Training Log](git-img/swappy-20241213-024501.png)
 Using CUDA instead of CPU results in faster training time.
 
-![Result Scores](.data/swappy-20241213-023814.png)
+![Result Scores](git-img/swappy-20241213-023814.png)
 
 ## Challenges Faced
 
