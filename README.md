@@ -2,8 +2,8 @@
 
 This project is a web application for recognizing facial expressions in images using a deep learning model. The application allows users to upload an image, and it returns the predicted facial expression along with the confidence score.
 
-## IMPORTANT: **Please download from [here](https://drive.google.com/file/d/1hBmYouP9vpmBGGrCkv8Icv_PB48Cnrsh/view?usp=drive_link){:target="_blank"} and extract the dataset into the directory, in a directory named data**
-
+## IMPORTANT: **Please download from <a href="https://drive.google.com/file/d/1hBmYouP9vpmBGGrCkv8Icv_PB48Cnrsh/view?usp=drive_link" target="_blank">here</a> and extract the dataset into the directory, in a folder named data.
+It should look something like this - 
 ## Problem Statement
 
 Understanding human emotions through facial expressions is a challenging task that has numerous applications. The goal of this project is to develop a system that can accurately recognize facial expressions from images.
