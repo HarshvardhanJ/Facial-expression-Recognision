@@ -1,14 +1,57 @@
 import torch
-import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.optim.lr_scheduler import StepLR
-from torch.cuda.amp import GradScaler, autocast
-from src.config import *
 from torchvision import models
 
-class SimpleCNN(nn.Module):
+class EmotionCNN(nn.Module):
     def __init__(self):
+        super(EmotionCNN, self).__init__()
+        self.conv_layers = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),  # Input channels = 1 (grayscale)
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.MaxPool2d(kernel_size=2),
+            nn.Dropout(0.25),
+            
+            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(128),
+            nn.Conv2d(128, 128, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(128),
+            nn.MaxPool2d(kernel_size=2),
+            nn.Dropout(0.25),
+            
+            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(256),
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(256),
+            nn.MaxPool2d(kernel_size=2),
+            nn.Dropout(0.25)
+        )
+        
+        self.fc_layers = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(256 * 6 * 6, 256),
+            nn.ReLU(),
+            nn.BatchNorm1d(256),
+            nn.Dropout(0.5),
+            nn.Linear(256, 7),  # 7 output classes
+            nn.Softmax(dim=1)
+        )
+    
+    def forward(self, x):
+        x = self.conv_layers(x)
+        x = self.fc_layers(x)
+        return x
+
+class SimpleCNN(nn.Module):
+    def __init__(self, num_classes=7):
         super(SimpleCNN, self).__init__()
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(32)
@@ -24,7 +67,7 @@ class SimpleCNN(nn.Module):
         self.dropout = nn.Dropout(0.5)
         self.fc1 = nn.Linear(512 * 1 * 1, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 7)
+        self.fc3 = nn.Linear(256, num_classes)  # Ensure num_classes is set correctly
 
     def forward(self, x):
         x = self.pool(F.relu(self.bn1(self.conv1(x))))
@@ -49,4 +92,3 @@ class ResNetModel(nn.Module):
 
     def forward(self, x):
         return self.model(x)
-

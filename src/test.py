@@ -1,14 +1,17 @@
 import torch
-from src.model import SimpleCNN
+from src.model import EmotionCNN
 from src.config import MODEL_SAVE_PATH, DATA_PATH
 from src.data_loader import load_data
 from sklearn.metrics import classification_report, confusion_matrix
 
-model = SimpleCNN()
-model.load_state_dict(torch.load(MODEL_SAVE_PATH))
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model = EmotionCNN().to(device)
+model.load_state_dict(torch.load(MODEL_SAVE_PATH, map_location=device))
 model.eval()
 
 def predict(image_tensor):
+    image_tensor = image_tensor.to(device)
     with torch.no_grad():
         output = model(image_tensor)
         _, predicted = torch.max(output.data, 1)
@@ -32,5 +35,5 @@ def test_model(test_loader):
     print(confusion_matrix(y_true, y_pred, labels=range(len(class_labels))))
 
 if __name__ == "__main__":
-    _, test_loader = load_data(DATA_PATH)
+    _, test_loader = load_data(TRAIN_DATA_PATH, TEST_DATA_PATH)
     test_model(test_loader)
