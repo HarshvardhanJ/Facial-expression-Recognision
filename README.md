@@ -69,7 +69,7 @@ Using CUDA instead of CPU results in faster training time.
 2. Start the Flask application:
 
     ```bash
-    python app.py
+    python -m app
     ```
 
 3. Open your web browser and navigate to `http://127.0.0.1:5000/`.
@@ -84,4 +84,8 @@ Using CUDA instead of CPU results in faster training time.
 - `templates/`: Directory for HTML templates
 - `requirements.txt`: List of required Python packages
 
+### Update
 
+![Updated Results](git-img/swappy-20241216-032208.png)
+
+After some Hyper parameter tweaking, the accuracy and validation accuracy increased by a considerable amount. :D
