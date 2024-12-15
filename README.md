@@ -4,6 +4,7 @@ This project is a web application for recognizing facial expressions in images u
 
 ## IMPORTANT: **Please download from <a href="https://drive.google.com/file/d/1hBmYouP9vpmBGGrCkv8Icv_PB48Cnrsh/view?usp=drive_link" target="_blank">here</a> and extract the dataset into the directory, in a folder named data.
 It should look something like this - 
+![Directory](git-img/swappy-20241216-040212.png)
 ## Problem Statement
 
 Understanding human emotions through facial expressions is a challenging task that has numerous applications. The goal of this project is to develop a system that can accurately recognize facial expressions from images.
