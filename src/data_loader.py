@@ -3,15 +3,14 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from src.config import BATCH_SIZE
 
-# Define transformations for the dataset
 data_transforms = transforms.Compose([
-    transforms.Grayscale(num_output_channels=1),  # Ensure images are grayscale
-    transforms.Resize((48, 48)),                  # Resize images to 48x48
-    transforms.RandomHorizontalFlip(),            # Apply random horizontal flip
-    transforms.RandomRotation(10),                # Apply random rotation
+    transforms.Grayscale(num_output_channels=1),  
+    transforms.Resize((48, 48)),                  
+    transforms.RandomHorizontalFlip(),            
+    transforms.RandomRotation(10),                
     transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
-    transforms.ToTensor(),                        # Convert images to tensor
-    transforms.Normalize(mean=[0.5], std=[0.5]),  # Normalize images
+    transforms.ToTensor(),                        
+    transforms.Normalize(mean=[0.5], std=[0.5]),  
 ])
 
 def load_data(train_dir, test_dir):
