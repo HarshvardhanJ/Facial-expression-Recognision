@@ -40,7 +40,6 @@ def train_model(train_loader, val_loader):
         train_accuracy = 100. * correct / total
         print(f"Epoch {epoch+1}/{NUM_EPOCHS}, Loss: {train_loss/len(train_loader):.4f}, Accuracy: {train_accuracy:.2f}%")
         
-        # Validation
         model.eval()
         val_correct = 0
         val_total = 0
@@ -56,12 +55,10 @@ def train_model(train_loader, val_loader):
         val_accuracy = 100. * val_correct / val_total
         print(f"Validation Accuracy: {val_accuracy:.2f}%")
         
-        # Save the best model
         if val_accuracy > best_accuracy:
             torch.save(model.state_dict(), MODEL_SAVE_PATH)
             best_accuracy = val_accuracy
         
-        # Step the scheduler
         scheduler.step()
 
     print("Training complete!")
