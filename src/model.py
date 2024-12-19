@@ -7,7 +7,7 @@ class EmotionCNN(nn.Module):
     def __init__(self):
         super(EmotionCNN, self).__init__()
         self.conv_layers = nn.Sequential(
-            nn.Conv2d(1, 32, kernel_size=3, padding=1),  # Input channels = 1 (grayscale)
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),  
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
@@ -41,7 +41,7 @@ class EmotionCNN(nn.Module):
             nn.ReLU(),
             nn.BatchNorm1d(256),
             nn.Dropout(0.5),
-            nn.Linear(256, 7),  # 7 output classes
+            nn.Linear(256, 7), 
             nn.Softmax(dim=1)
         )
     
@@ -67,7 +67,7 @@ class SimpleCNN(nn.Module):
         self.dropout = nn.Dropout(0.5)
         self.fc1 = nn.Linear(512 * 1 * 1, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, num_classes)  # Ensure num_classes is set correctly
+        self.fc3 = nn.Linear(256, num_classes) 
 
     def forward(self, x):
         x = self.pool(F.relu(self.bn1(self.conv1(x))))
