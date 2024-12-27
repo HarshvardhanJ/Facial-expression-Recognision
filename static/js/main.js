@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.upload-form');
     const loading = document.querySelector('.loading');
 
-    const progressFill = document.getElementById('progressFill'); // Ensure this element exists in upload.html
+    const progressFill = document.getElementById('progressFill'); 
 
-    // Drag and drop functionality
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
         dropZone.classList.add('drag-over');
@@ -23,21 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
         updateFileName();
     });
 
-    // Click to upload
     dropZone.addEventListener('click', () => {
         fileInput.click();
     });
 
     fileInput.addEventListener('change', updateFileName);
 
-    // Form submission with progress bar
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const file = fileInput.files[0];
         if (file) {
             const formData = new FormData(form);
             loading.style.display = 'block';
-            progressFill.style.display = 'block'; // Ensure progressFill is correctly selected
+            progressFill.style.display = 'block';
 
             fetch('/', {
                 method: 'POST',
@@ -49,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   document.close();
               });
 
-            // Simulate progress (replace with actual progress if possible)
             let width = 0;
             const interval = setInterval(() => {
                 if (width >= 100) {
