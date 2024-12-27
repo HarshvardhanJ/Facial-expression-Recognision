@@ -82,7 +82,7 @@ def objective(trial):
     lr = trial.suggest_loguniform('lr', 1e-5, 1e-2)
     weight_decay = trial.suggest_loguniform('weight_decay', 1e-5, 1e-2)
     
-    model = SimpleCNN().to(device) if model_type == 'SimpleCNN' else ResNetModel().to(device)
+    model = SimpleCNN().to(device) if model_type == 'SimpleCNN'  else EmotionCNN().to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3)
