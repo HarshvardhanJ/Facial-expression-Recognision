@@ -139,7 +139,6 @@ h1 {
     transition: width 0.3s ease-in-out;
 }
 
-/* Spinner Animation */
 .spinner {
     border-radius: 50%;
     width: 30px;
@@ -152,7 +151,6 @@ h1 {
     to { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
     .container {
         padding: 1rem;
